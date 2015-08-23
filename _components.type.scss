@@ -1,0 +1,57 @@
+//=================================
+// COMPONENT - TYPE
+//=================================
+
+//---------------------------------
+// Headline Sizing
+//---------------------------------
+@mixin headline-small {
+  font-size: rem(19px);
+  line-height: $line-tall;
+}
+
+@mixin headline-medium {
+  font-size: rem(24px);
+  line-height: $line-standard;
+}
+
+@mixin headline-large {
+  font-size: rem(33px);
+  line-height: $line-medium;
+}
+
+.c-headline--small {
+  @include mq(medium) {
+    @include headline-small;
+  }
+}
+
+.c-headline--medium {
+  @include headline-small;
+  @include mq(medium) {
+    @include headline-medium;
+  }
+}
+
+.c-headline--large {
+  @include headline-medium;
+  @include mq(medium) {
+    @include headline-large;
+  }
+}
+
+//---------------------------------
+// Paragraph Sizing
+//---------------------------------
+.c-type-medium {
+  font-size: 1em;
+  line-height: $line-medium;
+}
+
+.c-type-large {
+  font-size: 1.0625em;
+  line-height: $line-medium;
+  @include mq(large) {
+    font-size: 1.25em;
+  }
+}

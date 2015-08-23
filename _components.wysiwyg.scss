@@ -1,0 +1,44 @@
+//=================================
+// WYSIWYG STYLES
+//=================================
+
+.s-wysiwyg {
+
+  h1,
+  h2 {
+    @extend .headline--large;
+    font-weight: get-font-weight(thin);
+  }
+
+  h3,
+  h4 {
+    @extend .headline--medium;
+    font-weight: get-font-weight(normal);
+  }
+
+  h5,
+  h6 {
+    @extend .headline--small;
+    font-weight: get-font-weight(bold);
+  }
+
+  p,
+  li {
+    line-height: $line-medium;
+  }
+
+  a {
+    color: get-color(teal);
+  }
+
+  p,
+  ul,
+  ol {
+    margin-bottom: 2em;
+  }
+
+  ul,
+  ol {
+    margin-left: 2em;
+  }
+}

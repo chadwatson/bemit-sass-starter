@@ -1,0 +1,82 @@
+//=================================
+// BASE - PRINT
+//=================================
+
+// HTML5 Boilerplate Print Styles
+// https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css
+
+@media print {
+  *,
+  *:before,
+  *:after {
+    background: transparent !important;
+    color: get-color(black) !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important
+  }
+
+  body {
+    max-width: 8in;
+    margin: 0 auto;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-style: italic;
+    text-transform: none;
+    @include font(default);
+    font-size: rem(11px);
+    opacity: .8;
+  }
+
+  abbr[title]:after {
+      content: " (" attr(title) ")";
+  }
+
+  // Don't show links for images, or javascript/internal links
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 0.5cm;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}

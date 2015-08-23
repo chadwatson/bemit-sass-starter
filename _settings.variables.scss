@@ -1,0 +1,142 @@
+//=================================
+// SETTINGS - VARIABLES
+//=================================
+
+//---------------------------------
+// Root Font Sizing
+//---------------------------------
+
+// <html> and <body> font sizes
+$html-font-size: 62.5%;
+$body-font-size: 16px;
+$em-base: 16;
+
+// Multiplier for REM Mixin
+// It needs to stay the same size as <html> font size, but in pixels
+$base-font-size: 10px !default;
+
+// Whether to output fallback values in px when outputting rems.
+$rem-with-px-fallback: false !default;
+
+
+//---------------------------------
+// General
+//---------------------------------
+
+$global-font-smoothing: true;
+
+// Gutter
+$gutter:            10px;
+$gutter-large:      20px;
+
+// Rows Max-Width
+$wrapper:           1020px;
+$wrapper-small:     680px;
+$wrapper-medium:    980px;
+$wrapper-large:     1440px;
+
+// Animation
+$cubic:             cubic-bezier(0.63, 0.64, 0.3, 1);
+$timing:            500ms;
+$timing-fast:       350ms;
+
+// Print
+$print-media:       false !default;
+
+// Line Heights
+$line-short:        1.1;
+$line-standard:     1.25;
+$line-medium:       1.5;
+$line-tall:         2;
+
+
+//---------------------------------
+// Colors
+//---------------------------------
+
+$colors: (
+  black: #2C3E50,
+  white: #fff,
+  gray: (
+    base: #999,
+    light: #eee,
+    medium: #ccc,
+    dark: #333
+  ),
+  teal: (
+    base: #139397,
+    light: #33afb3,
+    dark: #264d4e
+  )
+);
+
+
+//---------------------------------
+// Fonts
+//---------------------------------
+
+$weights: (
+  thin:             100,
+  xlight:           200,
+  light:            300,
+  normal:           400,
+  medium:           500,
+  semibold:         600,
+  bold:             700,
+  heavy:            800,
+  black:            900
+);
+
+// @import url("http://hello.myfonts.net/count/2b0ad4");
+
+// @font-face {
+//  font-family: 'Font Family';
+//  src:url('assets/fonts/font-folder-name/font-file.eot');
+//  src:url('assets/fonts/font-folder-name/font-file.eot?#iefix') format('embedded-opentype'),
+//    url('assets/fonts/font-folder-name/font-file.woff') format('woff'),
+//    url('assets/fonts/font-folder-name/font-file.ttf') format('truetype');
+//  font-weight: map-get(normal);
+// }
+
+$fonts: (
+  default: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+  fonttwo: (
+    regular: '"Font Family", sans-serif',
+    light: '"Font Family Light", sans-serif',
+    bold: '"Font Family Bold", sans-serif'
+  )
+);
+
+
+//---------------------------------
+// Breakpoints
+//---------------------------------
+
+$breakpoints: (
+  tiny:             0px,
+  mini:             480px,
+  small:            600px,
+  medium:           768px,
+  large:            960px,
+  xlarge:           1220px,
+  xxlarge:          1440px,
+  xxxlarge:         1640px
+);
+
+//---------------------------------
+// Z-Index
+//---------------------------------
+
+// http://www.sitepoint.com/better-solution-managing-z-index-sass/
+// http://viget.com/extend/sass-maps-and-z-indexes
+$z-layers: (
+  pit:              -1,
+  default:          1,
+  footer:           5,
+  header:           10,
+  nav:              20,
+  announce:         30,
+  modal:            40,
+  overlay:          50,
+  browsehappy:      60
+);

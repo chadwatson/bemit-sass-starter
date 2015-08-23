@@ -1,0 +1,93 @@
+//=================================
+// BASE - TYPE
+//=================================
+
+//---------------------------------
+// Pseudo
+//---------------------------------
+
+::selection {
+  background: get-color(gray);
+  color: get-color(white);
+  text-shadow: none;
+}
+
+//---------------------------------
+// General
+//---------------------------------
+
+html {
+  font-size: $html-font-size;
+}
+
+body {
+  background: get-color(white);
+  color: get-color(black);
+  @include font(default);
+  font-size: $body-font-size;
+  @if $global-font-smoothing {
+    @include font-smoothing;
+  }
+}
+
+a {
+  color: get-color(black);
+  text-decoration: none;
+  &:hover,
+  &:focus,
+  &:active {
+    color: get-color(gray);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+
+//---------------------------------
+// Headlines
+//---------------------------------
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1;
+  a {
+    color: get-color(black);
+  }
+}
+
+
+//---------------------------------
+// Text Components
+//---------------------------------
+
+p,
+dl,
+address {
+  font-size: 1em;
+  line-height: 1;
+}
+
+p,
+li,
+dt,
+dd {
+  font-weight: normal;
+  font-style: normal;
+}
+
+li {
+  line-height: 1;
+}
+
+//---------------------------------
+// Extend WYSIWYG Styles
+//---------------------------------
+
+.wysiwyg {
+  @extend %wysiwyg;
+}

@@ -1,0 +1,75 @@
+//=================================
+// UTILITIES
+//=================================
+
+
+//---------------------------------
+// Global States
+//---------------------------------
+
+// Absolute center content
+.is-abs-center {
+  display: block !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+// Absolute Center Vertically (ie9+)
+// Parent container will need to have a height for it to work.
+.is-centered-vertical {
+  display: block !important;
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+// Absolute Center Horizontally (ie9+)
+// Parent container will need to have a height for it to work.
+.is-centered-horizontal {
+  display: block !important;
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+//---------------------------------
+// Helpers
+//---------------------------------
+
+// Visually hide elements while at the
+// same time make them accessible on screen readers
+.u-hidden {
+  margin: -1px !important;
+  padding: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip: rect(0, 0, 0, 0) !important;
+  position: absolute !important;
+}
+
+// Ellipsis
+.u-ellipsis {
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+// Clearfix
+.u-cf,
+.u-clearfix {
+  zoom: 1 !important;
+  &:before,
+  &:after {
+    content: "\0020" !important;
+    display: block !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  &:after {
+    clear: both !important;
+  }
+}

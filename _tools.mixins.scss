@@ -1,0 +1,231 @@
+//=================================
+// MIXINS
+//=================================
+
+
+//---------------------------------
+// General
+//---------------------------------
+
+// Cross-browser background-cover for old IE
+// https://raw.githubusercontent.com/louisremi/background-size-polyfill/gh-pages/backgroundsize.min.htc
+@mixin bg-cover {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  -ms-behavior: url('assets/images/backgroundsize.min.htc');
+}
+
+//---------------------------------
+// Fonts
+//---------------------------------
+
+@mixin font($name: default, $weight: normal) {
+  @if type-of($weight) == 'number' {
+    font-family: get-font-stack($name);
+    font-weight: $weight;
+  } @else {
+    font-family: get-font-stack($name, $weight);
+    font-weight: get-font-weight($weight);
+  }
+}
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 1px 1px 1px rgba(get-color(black), 0.004);
+}
+
+@mixin no-font-smoothing {
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+  text-shadow: none;
+}
+
+
+//---------------------------------
+// Media Queries
+//---------------------------------
+@mixin mq($point, $type: "min") {
+  @if $print-media {
+    @if $point == "print" {
+      @media print {
+        @content;
+      }
+    } @else {
+      @content;
+    }
+  } @else {
+    $breakpoint: null;
+    @if type-of($point) == "number" {
+      @if unitless($point) or unit($point) == "em" or unit($point) == "rem" or unit($point) == "%" {
+        @warn "Please use pixel values.";
+      } @else {
+        $breakpoint: $point;
+      }
+    } @else if map-has-key($breakpoints, $point) {
+      $breakpoint: map-get($breakpoints, $point);
+    } @else {
+      @warn "Couldn't find a breakpoint named `#{$point}`.";
+    }
+
+    @if $breakpoint != null {
+      @if $type == "max" {
+        @media screen and (max-width: em($breakpoint - 1px)) {
+          @content;
+        }
+      } @else {
+        @media screen and (min-width: em($breakpoint)) {
+          @content;
+        }
+      }
+    }
+  }
+}
+
+//----------------------------------
+// REM Sizing
+//----------------------------------
+
+// This is a modified version of
+// http://davidensinger.com/2013/03/using-rems-with-sass/
+
+// Base font size in pixels, if not already defined.
+// Should be the same as the font-size of the html element.
+// You will find the setting under /variables/_settings.scss
+// Look for $base-font-size
+
+@mixin rem($property, $values, $use-px-fallback: $rem-with-px-fallback) {
+  // Create a couple of empty lists as output buffers.
+  $font-size: $base-font-size;
+  $px-values: ();
+  $rem-values: ();
+
+    // Loop through the $values list
+  @each $value in $values {
+    // For each property value, if it's in rem or px, derive both rem and px values for it and add those to the end of the appropriate buffer.
+    // Ensure all pixel values are rounded to the nearest pixel.
+    @if $value == 0 or $value == 0px {
+      // 0 -- use it without a unit
+      $px-values: join($px-values, 0);
+      $rem-values: join($rem-values, 0);
+    } @else if type-of($value) == number and not unitless($value) and (unit($value) == px) {
+      // px value given - calculate rem value from font-size
+      $new-rem-value: $value / $font-size;
+      $px-values: join($px-values, round($value));
+      $rem-values: join($rem-values, #{$new-rem-value}rem);
+    } @else if type-of($value) == number and not unitless($value) and (unit($value) == "%") {
+      // % value given - don't add px or rem
+      $px-values: join($px-values, #{$value});
+      $rem-values: join($rem-values, #{$value});
+    } @else if $value == auto {
+      // auto - don't add px or rem
+      $px-values: join($px-values, auto);
+      $rem-values: join($rem-values, auto);
+    } @else {
+      // unitless value - use those directly as rem and calculate the px-fallback
+      $px-values: join($px-values, round($value * $font-size));
+      $rem-values: join($rem-values, #{$value}rem);
+    }
+  }
+
+  // Output the converted rules
+  // Use pixel fallback for browsers that don't understand rem units.
+  @if $use-px-fallback {
+    #{$property}: $px-values;
+  }
+  #{$property}: $rem-values;
+}
+
+
+//---------------------------------
+// Layout
+//---------------------------------
+
+// max-width container with multiple options, see variables for options
+// ex: @include row(medium)
+@mixin row($width, $center: true) {
+  @if $width == small {
+    max-width: em($max-width-small);
+  } @else if $width == medium {
+    max-width: em($max-width-medium);
+  } @else if $width == large {
+    max-width: em($max-width-large);
+  }
+  @if $center == true {
+    margin: 0 auto;
+  }
+  width: 100%;
+}
+
+// gutter between columns, see variables for options
+// ex: @include gutter or @include gutter(large)
+@mixin gutter($size) {
+  padding-left: em($gutter);
+  padding-right: em($gutter);
+  @if $size == large {
+    @include mq(medium) {
+      padding-left: em($gutter-large);
+      padding-right: em($gutter-large);
+    }
+  }
+}
+
+//---------------------------------
+// Input Placeholders
+//---------------------------------
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+
+//---------------------------------
+// Animation Keyframes
+//---------------------------------
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+
+//---------------------------------
+// Cross Browser (legacy)
+//---------------------------------
+
+// Cross-browser alpha transparency for old IE
+@mixin rgba($color, $alpha) {
+  $rgba: rgba($color, $alpha);
+  $ie-hex-str: ie-hex-str($rgba);
+  background-color: transparent;
+  background-color: $rgba;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+  zoom: 1;
+}
+
+// Cross-browser opacity for old IE
+@mixin opacity($alpha) {
+  opacity: $alpha;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=$alpha*100)";
+  filter: alpha(opacity=$alpha*100);
+}

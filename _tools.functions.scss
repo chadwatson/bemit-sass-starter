@@ -1,0 +1,131 @@
+//=================================
+// FUNCTIONS
+//=================================
+
+
+//---------------------------------
+// General
+//---------------------------------
+
+/**
+ * Gets a font stack
+ * @param  {String} $name    The name (key) of the font in the $fonts map
+ * @param  {String} $weight  The font weight name (ex. light)
+ * @return {String}          The font stack
+ */
+@function get-from-map($map, $key, $variant) {
+  @if map-has-key($map, $key) {
+    $value: map-get($map, $key);
+
+    @if (length($value) > 1) { // This must be a map
+      @return map-get(map-get($map, $key), $variant);
+    } @else {
+      @return $value;
+    }
+  } @else {
+    @warn "Couldn't find `#{$key}`.";
+  }
+}
+
+
+//---------------------------------
+// Fonts
+//---------------------------------
+
+/**
+ * Get the numeric font weight value from a name
+ * @param  {String} $name The name of the weight (ex. heavy)
+ * @return {String}       The weight value
+ */
+@function get-font-weight($name) {
+  @return map-get($weights, $name);
+}
+
+/**
+ * Gets a font stack
+ * @param  {String} $font_name    The name (key) of the font in the $fonts map
+ * @param  {String} $weight       The font weight name (ex. light)
+ * @return {String}               The font stack
+ */
+@function get-font-stack($font_name, $weight: normal) {
+  $font: get-from-map($fonts, $font_name, $weight);
+  
+  @if $font {
+    @return $font;
+  } @else {
+    @warn "Couldn't find a font named `#{$font_name}`.";
+  }
+}
+
+//---------------------------------
+// Colors
+//---------------------------------
+
+/**
+ * Returns a color with an optional tone from the map
+ * @param  {String}  $color_name   The base name of the color
+ * @param  {String}  $tone         The tone of that color or 'base'
+ * @return {String}                The matching color's value from the map
+ */
+@function get-color($color_name, $tone: base) {
+  $color: get-from-map($colors, $color_name, $tone);
+
+  @if $color {
+    @return $color;
+  } @else {
+    @warn "Couldn't find a color named `#{$color_name}`.";
+  }
+}
+
+//---------------------------------
+// Units
+//---------------------------------
+@function em($px-values, $font-size: $body-font-size) {
+  // Create an empty list that we can dump values into
+  $em-values: ();
+  @each $value in $px-values {
+    // Check to see if value is 0, auto, or inherited
+    // If so, do nothing and output value
+    @if $value == 0 or $value == auto or $value == inherit {
+      $em-values: append($em-values, $value);
+    // If the value is a pixel, convert to em value
+    } @else if unit($value) == 'px' {
+      $em-values: append($em-values, #{($value/$font-size)}em);
+    // For everything else, keep as is
+    } @else {
+      $em-values: append($em-values, $value);
+    }
+  }
+  @return $em-values;
+}
+
+@function rem($px-values, $font-size: $base-font-size) {
+  // Create an empty list that we can dump values into
+  $rem-values: ();
+  @each $value in $px-values {
+    // Check to see if value is 0, auto, or inherited
+    // If so, do nothing and output value
+    @if $value == 0 or $value == auto or $value == inherit {
+      $rem-values: append($rem-values, $value);
+    // If the value is a pixel, convert to em value
+    } @else if unit($value) == 'px' {
+      $rem-values: append($rem-values, #{($value/$font-size)}rem);
+    // For everything else, keep as is
+    } @else {
+      $rem-values: append($rem-values, $value);
+    }
+  }
+  @return $rem-values;
+}
+
+
+//---------------------------------
+// Z-Index Management
+//---------------------------------
+@function z($layer) {
+  @if not map-has-key($z-layers, $layer) {
+    @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted. Check inside variables/_settings.scss";
+  }
+
+  @return map-get($z-layers, $layer);
+}
