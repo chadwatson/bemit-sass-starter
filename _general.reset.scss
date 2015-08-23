@@ -55,10 +55,12 @@ body {
   position: relative;
   box-sizing: inherit;
 
-  // Hide tap on touch devices.
-  @media (max-width : 959px) {
-    * {
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  @if $tap-highlight {
+    // Hide tap on touch devices.
+    @media (max-width : 959px) {
+      * {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
     }
   }
 }

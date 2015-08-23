@@ -2,6 +2,14 @@
 // SETTINGS - VARIABLES
 //=================================
 
+
+//---------------------------------
+// General
+//---------------------------------
+$global-font-smoothing: true;
+$tap-highlight: false;
+
+
 //---------------------------------
 // Root Font Sizing
 //---------------------------------
@@ -22,8 +30,6 @@ $rem-with-px-fallback: false !default;
 //---------------------------------
 // General
 //---------------------------------
-
-$global-font-smoothing: true;
 
 // Gutter
 $gutter:            10px;
