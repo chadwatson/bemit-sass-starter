@@ -51,7 +51,7 @@
   $font: get-from-map($fonts, $font_name, $weight);
   
   @if $font {
-    @return $font;
+    @return unquote($font);
   } @else {
     @warn "Couldn't find a font named `#{$font_name}`.";
   }
