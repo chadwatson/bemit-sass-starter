@@ -7,12 +7,12 @@
 // General
 //---------------------------------
 
-/**
- * Gets a font stack
- * @param  {String} $name    The name (key) of the font in the $fonts map
- * @param  {String} $weight  The font weight name (ex. light)
- * @return {String}          The font stack
- */
+// --
+// Gets a font stack
+// @param  {String} $name    The name (key) of the font in the $fonts map
+// @param  {String} $weight  The font weight name (ex. light)
+// @return {String}          The font stack
+// --
 @function get-from-map($map, $key, $variant) {
   @if map-has-key($map, $key) {
     $value: map-get($map, $key);
@@ -32,21 +32,21 @@
 // Fonts
 //---------------------------------
 
-/**
- * Get the numeric font weight value from a name
- * @param  {String} $name The name of the weight (ex. heavy)
- * @return {String}       The weight value
- */
+// --
+// Get the numeric font weight value from a name
+// @param  {String} $name The name of the weight (ex. heavy)
+// @return {String}       The weight value
+// --
 @function get-font-weight($name) {
   @return map-get($weights, $name);
 }
 
-/**
- * Gets a font stack
- * @param  {String} $font_name    The name (key) of the font in the $fonts map
- * @param  {String} $weight       The font weight name (ex. light)
- * @return {String}               The font stack
- */
+// --
+// Gets a font stack
+// @param  {String} $font_name    The name (key) of the font in the $fonts map
+// @param  {String} $weight       The font weight name (ex. light)
+// @return {String}               The font stack
+// --
 @function get-font-stack($font_name, $weight: normal) {
   $font: get-from-map($fonts, $font_name, $weight);
   
@@ -61,12 +61,12 @@
 // Colors
 //---------------------------------
 
-/**
- * Returns a color with an optional tone from the map
- * @param  {String}  $color_name   The base name of the color
- * @param  {String}  $tone         The tone of that color or 'base'
- * @return {String}                The matching color's value from the map
- */
+// --
+// Returns a color with an optional tone from the map
+// @param  {String}  $color_name   The base name of the color
+// @param  {String}  $tone         The tone of that color or 'base'
+// @return {String}                The matching color's value from the map
+// --
 @function get-color($color_name, $tone: base) {
   $color: get-from-map($colors, $color_name, $tone);
 
@@ -80,12 +80,13 @@
 //---------------------------------
 // Units
 //---------------------------------
-/**
- * Converts pixels to ems
- * @param  {Number} $px-values  The pixel value to convert
- * @param  {Number} $font-size  The context for which to set the em value
- * @return {Number}             The new em value
- */
+
+// --
+// Converts pixels to ems
+// @param  {Number} $px-values  The pixel value to convert
+// @param  {Number} $font-size  The context for which to set the em value
+// @return {Number}             The new em value
+// --
 @function em($px-values, $font-size: $body-font-size) {
   // Create an empty list that we can dump values into
   $em-values: ();
@@ -105,12 +106,12 @@
   @return $em-values;
 }
 
-/**
- * Converts pixels to rems
- * @param  {Number} $px-values  The pixel value to convert
- * @param  {Number} $font-size  The context for which to set the rem value
- * @return {Number}             The new rem value
- */
+// --
+// Converts pixels to rems
+// @param  {Number} $px-values  The pixel value to convert
+// @param  {Number} $font-size  The context for which to set the rem value
+// @return {Number}             The new rem value
+// --
 @function rem($px-values, $font-size: $base-font-size) {
   // Create an empty list that we can dump values into
   $rem-values: ();
@@ -135,11 +136,11 @@
 // Z-Index Management
 //---------------------------------
 
-/**
- * Gets the number value from the z-index map by a given name
- * @param  {String} $layer The name of the layer
- * @return {Number}        The value of the layer
- */
+// --
+// Gets the number value from the z-index map by a given name
+// @param  {String} $layer The name of the layer
+// @return {Number}        The value of the layer
+// --
 @function z($layer) {
   @if not map-has-key($z-layers, $layer) {
     @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted. Check inside variables/_settings.scss";

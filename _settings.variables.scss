@@ -105,11 +105,11 @@ $weights: (
 // }
 
 
- // Font stacks need to be wrapped in quotes
- // or else there will be error due to the commas.
- // The get-font-stack function handles unquoting them,
- // but if you're going to get these values manually
- // make sure to use the unquote() function.
+// Font stacks need to be wrapped in quotes
+// or else there will be error due to the commas.
+// The get-font-stack function handles unquoting them,
+// but if you're going to get these values manually
+// make sure to use the unquote() function.
 $fonts: (
   default: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
   fonttwo: (
