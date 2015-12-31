@@ -80,6 +80,12 @@
 //---------------------------------
 // Units
 //---------------------------------
+/**
+ * Converts pixels to ems
+ * @param  {Number} $px-values  The pixel value to convert
+ * @param  {Number} $font-size  The context for which to set the em value
+ * @return {Number}             The new em value
+ */
 @function em($px-values, $font-size: $body-font-size) {
   // Create an empty list that we can dump values into
   $em-values: ();
@@ -99,6 +105,12 @@
   @return $em-values;
 }
 
+/**
+ * Converts pixels to rems
+ * @param  {Number} $px-values  The pixel value to convert
+ * @param  {Number} $font-size  The context for which to set the rem value
+ * @return {Number}             The new rem value
+ */
 @function rem($px-values, $font-size: $base-font-size) {
   // Create an empty list that we can dump values into
   $rem-values: ();
@@ -122,6 +134,12 @@
 //---------------------------------
 // Z-Index Management
 //---------------------------------
+
+/**
+ * Gets the number value from the z-index map by a given name
+ * @param  {String} $layer The name of the layer
+ * @return {Number}        The value of the layer
+ */
 @function z($layer) {
   @if not map-has-key($z-layers, $layer) {
     @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted. Check inside variables/_settings.scss";

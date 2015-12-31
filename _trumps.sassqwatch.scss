@@ -1,30 +1,32 @@
 //=================================
 // SASSQWATCH SETUP
 //=================================
-$bp-count: length($breakpoints);
-$bp-order: '';
-$i: 0;
+@if $sassqwatch {
+  $bp-count: length($breakpoints);
 
-// Make sure that this class is on the html element
-.js-sassqwatch {
   head {
+    $i: 0;
+    
     @each $name, $value in $breakpoints {
       // attach a media query for this breakpoint to expose the name
       @include mq($name) {
-        font-family: $name !important;
+        font-family: $name;
       }
-
-      // while we're at it append the order string
-      // which will be used on the "title" element
+    }
+  }
+  
+  title {
+    $bp-order: '';
+    $i: 0;
+    // expose the order of the breakpoints
+    @each $name, $value in $breakpoints {
       $i: $i + 1;
       $bp-order: $bp-order + $name;
+      
       @if $i != $bp-count {
         $bp-order: $bp-order + ', ';
       }
     }
-  }
-
-  title {
-    font-family: $bp-order !important;
+    font-family: $bp-order;
   }
 }

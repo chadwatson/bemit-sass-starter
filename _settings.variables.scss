@@ -4,10 +4,11 @@
 
 
 //---------------------------------
-// General
+// Config Switching
 //---------------------------------
-$global-font-smoothing: true;
-$tap-highlight: false;
+$global-font-smoothing:    true !default;
+$tap-highlight:            false !default;
+$print-media:              false !default;
 
 
 //---------------------------------
@@ -45,9 +46,6 @@ $wrapper-large:     1440px;
 $cubic:             cubic-bezier(0.63, 0.64, 0.3, 1);
 $timing:            500ms;
 $timing-fast:       350ms;
-
-// Print
-$print-media:       false !default;
 
 // Line Heights
 $line-short:        1.1;
@@ -95,6 +93,8 @@ $weights: (
 
 // @import url("http://hello.myfonts.net/count/2b0ad4");
 
+
+// Custom font families that need to be included
 // @font-face {
 //  font-family: 'Font Family';
 //  src:url('assets/fonts/font-folder-name/font-file.eot');
@@ -104,6 +104,12 @@ $weights: (
 //  font-weight: map-get(normal);
 // }
 
+
+ // Font stacks need to be wrapped in quotes
+ // or else there will be error due to the commas.
+ // The get-font-stack function handles unquoting them,
+ // but if you're going to get these values manually
+ // make sure to use the unquote() function.
 $fonts: (
   default: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
   fonttwo: (
@@ -133,8 +139,10 @@ $breakpoints: (
 // Z-Index
 //---------------------------------
 
-// http://www.sitepoint.com/better-solution-managing-z-index-sass/
-// http://viget.com/extend/sass-maps-and-z-indexes
+/**
+ * http://www.sitepoint.com/better-solution-managing-z-index-sass/
+ * http://viget.com/extend/sass-maps-and-z-indexes
+ */
 $z-layers: (
   pit:              -1,
   default:          1,
